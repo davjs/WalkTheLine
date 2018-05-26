@@ -13,9 +13,17 @@ public class Drone : MonoBehaviour
     private float _progress = 0;
     private bool _isMoving = false;
 
-    public void ChangeRoad(Road road)
+    public void ChangeRoad(Road newRoad)
     {
-        Road = road;
+        foreach (var component in Road.ObjectAtEnd.GetComponents(typeof(Component)))
+        {
+            if (component is ILeavable)
+            {
+                (component as ILeavable).Leave(gameObject);
+            }
+        }
+
+        Road = newRoad;
         _progress = 0;
     }
 
