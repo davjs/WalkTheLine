@@ -21,11 +21,6 @@ public class Switch : MonoBehaviour
     public void SwitchRoadForDrone(Drone drone)
     {
         var newRoad = drone.Road == RoadA ? RoadB : RoadA;
-        drone.Road = newRoad;
-        drone.transform.position = new Vector3(
-            newRoad.Start.position.x,
-            drone.transform.position.y,
-            newRoad.Start.position.z
-        );
+        drone.ChangeRoad(newRoad);
     }
 }
