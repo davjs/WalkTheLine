@@ -1,26 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class Farmable : MonoBehaviour
+public class Farmable : MonoBehaviour, IEnterable
 {
     public string ResourceType = "Berry";
     public int MaxPickUpAmount = 10;
 
-    // Use this for initialization
-    void Start()
+    public void Enter(GameObject enteringObject)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {
-        var collidedWithObject = col.gameObject;
-        var droneComponent = collidedWithObject.GetComponent<Drone>();
+        var droneComponent = enteringObject.GetComponent<Drone>();
         if (droneComponent)
         {
             var switchComponent = GetComponent<Switch>();
@@ -30,7 +20,7 @@ public class Farmable : MonoBehaviour
             }
         }
 
-        var carryComponent = collidedWithObject.GetComponent<Carry>();
+        var carryComponent = enteringObject.GetComponent<Carry>();
         if (carryComponent)
         {
             carryComponent.PickUp(ResourceType, MaxPickUpAmount);
