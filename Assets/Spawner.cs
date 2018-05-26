@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 
 	public GameObject ToSpawn;
 	public float spawnRate;
-	public GameObject Road;
+	public Road Road;
 
 	private float timeSinceLastSpawn = 0;
 

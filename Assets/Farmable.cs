@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class Farmable : MonoBehaviour
 {
+    public GameObject Resource;
 
-	public GameObject Resource;
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	void OnCollisionEnter (Collision col)
-	{
-		if(col.gameObject.name.StartsWith("Character"))
-		{
-			Destroy(col.gameObject);
-		}
-	}
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        var droneComponent = col.gameObject.GetComponent<Drone>();
+        if (droneComponent)
+        {
+            var switchComponent = GetComponent<Switch>();
+            if (switchComponent)
+            {
+                switchComponent.SwitchRoadForDrone(droneComponent);
+            }
+        }
+    }
 }
